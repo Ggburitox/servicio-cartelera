@@ -1,4 +1,5 @@
 fastapi==0.95.2
 sqlalchemy==2.0.23
-psycopg2-binary==2.9.7
+pymysql==1.1.0
+python-dotenv==1.0.0
 uvicorn==0.22.0
