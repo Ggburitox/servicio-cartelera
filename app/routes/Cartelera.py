@@ -6,7 +6,6 @@ from database import SessionLocal
 
 router = APIRouter()
 
-# Dependency
 def get_db():
     db = SessionLocal()
     try:
