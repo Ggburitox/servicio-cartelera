@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from models import Base
-from database import engine
-from routes.cartelera import router as cartelera_router
+from app.models import Base
+from app.database import engine
+from app.routes.cartelera import router as cartelera_router
 
 Base.metadata.create_all(bind=engine)
 
