@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
-from typing import Optional  # Añade esta importación
+from typing import Optional
 
 class PeliculaBase(BaseModel):
     titulo: str = Field(..., example="Matrix")
@@ -9,10 +9,10 @@ class PeliculaBase(BaseModel):
     fecha_estreno: datetime = Field(..., example="1999-03-31T00:00:00")
 
 class PeliculaCreate(PeliculaBase):
-    id: Optional[int] = None  # Hacemos el id opcional para creación
+    pass  # No incluir id aquí
 
 class Pelicula(PeliculaBase):
-    id: int  # Requerido para respuestas
-
+    id: int
+    
     class Config:
         from_attributes = True
