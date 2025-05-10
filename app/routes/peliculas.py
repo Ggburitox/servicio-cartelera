@@ -9,11 +9,11 @@ router = APIRouter()
 @router.post("/peliculas/", response_model=Pelicula)
 def crear_pelicula(pelicula: PeliculaCreate, db: Session = Depends(get_db)):
     try:
-        db_pelicula = Pelicula(**pelicula.model_dump())
+        db_pelicula = Pelicula(**pelicula.model_dump())  # Cambia esto
         db.add(db_pelicula)
         db.commit()
         db.refresh(db_pelicula)
-        return db_pelicula
+        return db_pelicula  # Ahora incluirá el id generado
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=str(e))
