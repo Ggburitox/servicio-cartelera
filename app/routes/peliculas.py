@@ -2,16 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.models import Pelicula
 from app.schemas import PeliculaCreate, Pelicula
-from app.database import get_db
+from app.database import get_db  # Ahora importará correctamente
 
 router = APIRouter()
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @router.post("/peliculas/", response_model=Pelicula)
 def crear_pelicula(pelicula: PeliculaCreate, db: Session = Depends(get_db)):
