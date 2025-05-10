@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
+from typing import List, Optional
 
 class PeliculaBase(BaseModel):
     titulo: str = Field(..., example="Matrix")
@@ -15,3 +16,7 @@ class Pelicula(PeliculaBase):
     
     class Config:
         from_attributes = True
+
+# Opcional para respuestas de lista
+class PeliculaList(BaseModel):
+    peliculas: List[Pelicula]
