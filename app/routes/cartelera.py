@@ -13,7 +13,7 @@ def get_db():
     finally:
         db.close()
 
-@router.post("/peliculas/", response_model=Pelicula)
+@router.post("/peliculas/", response_model=Pelicula, tags=["Películas"])
 def crear_pelicula(pelicula: PeliculaCreate, db: Session = Depends(get_db)):
     db_pelicula = Pelicula(**pelicula.dict())
     db.add(db_pelicula)
@@ -21,11 +21,11 @@ def crear_pelicula(pelicula: PeliculaCreate, db: Session = Depends(get_db)):
     db.refresh(db_pelicula)
     return db_pelicula
 
-@router.get("/peliculas/", response_model=list[Pelicula])
+@router.get("/peliculas/", response_model=list[Pelicula], tags=["Películas"])
 def listar_peliculas(db: Session = Depends(get_db)):
     return db.query(Pelicula).all()
 
-@router.get("/peliculas/{pelicula_id}", response_model=Pelicula)
+@router.get("/peliculas/{pelicula_id}", response_model=Pelicula, tags=["Películas"])
 def obtener_pelicula(pelicula_id: int, db: Session = Depends(get_db)):
     pelicula = db.query(Pelicula).filter(Pelicula.id == pelicula_id).first()
     if not pelicula:
