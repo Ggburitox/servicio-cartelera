@@ -1,7 +1,7 @@
-from sqlalchemy import Column, Integer, String, DateTime
 from app.database import Base
+from sqlalchemy import Column, Integer, String, DateTime
 
-class PeliculaDB(Base):  # Cambia el nombre a PeliculaDB
+class PeliculaDB(Base):
     __tablename__ = "peliculas"
     
     id = Column(Integer, primary_key=True, index=True)
