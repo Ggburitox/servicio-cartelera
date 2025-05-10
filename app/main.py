@@ -1,24 +1,11 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from app.api.endpoints import peliculas
 from app.database import engine, Base
-from app.routes.peliculas import router as peliculas_router
 
-# Crea las tablas en la BD
+app = FastAPI()
+
+# Crea las tablas
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="API Cartelera", version="1.0.0")
-
-# Configura CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# Incluye los endpoints
-app.include_router(peliculas_router, prefix="/api/v1")
-
-@app.get("/health")
-def health_check():
-    return {"status": "ok"}
+# Incluye los routers
+app.include_router(peliculas.router, prefix="/api/v1")
