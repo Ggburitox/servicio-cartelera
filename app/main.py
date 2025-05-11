@@ -19,8 +19,12 @@ app.add_middleware(
 # Crea tablas en la BD
 Base.metadata.create_all(bind=engine)
 
+# Health check
+@app.get("/health", tags=["Health"])
+def health_check():
+    return {"status": "ok"}
+
 # Incluye los endpoints
 app.include_router(
     peliculas.router,
-    prefix="/api/v1",
 )
